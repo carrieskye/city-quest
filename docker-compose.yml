@@ -1,0 +1,27 @@
+version: '3'
+services:
+  frontend:
+    build: ./cityquest-frontend/
+    ports:
+      - "3000:80"
+    links:
+      - backend
+    environment:
+      - APIURL=http://localhost:8080/
+  backend:
+    build: ./cityquest-backend/
+    ports:
+      - "8080:8080"
+    links:
+      - mongodb
+    environment:
+      - MONGODB_URI=mongodb://mongodb/cityquest
+      - IMAGESERVICE_URI=http://imageservice:8080/
+  imageservice:
+    build: ./city-image-service/
+    ports:
+      - "8081:8080"
+  mongodb:
+    image: mvertes/alpine-mongo
+    volumes:
+      - ./data/mongodb:/data/db
