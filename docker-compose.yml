@@ -8,20 +8,76 @@ services:
       - backend
     environment:
       - APIURL=http://localhost:8080/
+    labels:
+      - "traefik.port=80"
+      - "traefik.frontend.rule=PathPrefix:/"
+
   backend:
     build: ./cityquest-backend/
     ports:
-      - "8080:8080"
+      - "8081:8080"
     links:
       - mongodb
     environment:
       - MONGODB_URI=mongodb://mongodb/cityquest
       - IMAGESERVICE_URI=http://imageservice:8080/
+    labels:
+      - "traefik.port=8080"
+      - "traefik.frontend.rule=PathPrefixStrip:/cityquest/"
+    depends_on:
+      - consul
+
   imageservice:
     build: ./city-image-service/
     ports:
-      - "8081:8080"
+      - "8082:8080"
+    labels:
+      - "traefik.port=8080"
+      - "traefik.frontend.rule=PathPrefixStrip:/imageservice/"
+    depends_on:
+      - consul
+
+  recommendation:
+    build: ./ucll-recommendation-engine/
+    ports:
+      - "8083:8081"
+    labels:
+      - "traefik.port=8081"
+      - "traefik.frontend.rule=PathPrefix:/recommendation/"
+    depends_on:
+      - consul
+
   mongodb:
     image: mvertes/alpine-mongo
     volumes:
       - ./data/mongodb:/data/db
+
+  traefik:
+    image: traefik
+    command: --api --docker # Enables the web UI and tells Træfik to listen to docker
+    ports:
+      - "8080:80"   # The HTTP port
+      - "8501:8080" # The Web UI (enabled by --api)
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  consul:
+    image: consul
+    restart: unless-stopped
+    ports:
+      - 8500:8500
+    labels:
+      - "traefik.port=8500"
+
+      - "traefik.frontend.rule=PathPrefixStrip:/consul/"
+      - "traefik.frontend.rule=PathPrefixStrip:/ui/,/v1/"
+
+  registrator:
+    depends_on:
+      - consul
+    image: gliderlabs/registrator:master
+    command: -internal consul://consul:8500
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock
+    links:
+      - consul
