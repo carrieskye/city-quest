@@ -1,0 +1,12 @@
+[submodule "frontend"]
+	path = frontend
+	url = git@github.com:ucll-carey/frontend.git
+[submodule "backend"]
+	path = backend
+	url = git@github.com:ucll-carey/backend.git
+[submodule "image-service"]
+	path = image-service
+	url = git@github.com:ucll-carey/image-service.git
+[submodule "ucll-recommendation-engine"]
+	path = ucll-recommendation-engine
+	url = git@github.com:ucll-carey/ucll-recommendation-engine.git
