@@ -1,7 +1,7 @@
 version: '3'
 services:
   frontend:
-    build: ./cityquest-frontend/
+    build: ./frontend/
     ports:
       - "3000:80"
     links:
@@ -13,7 +13,7 @@ services:
       - "traefik.frontend.rule=PathPrefix:/"
 
   backend:
-    build: ./cityquest-backend/
+    build: ./backend/
     ports:
       - "8081:8080"
     links:
@@ -28,7 +28,7 @@ services:
       - consul
 
   imageservice:
-    build: ./city-image-service/
+    build: ./image-service/
     ports:
       - "8082:8080"
     labels:
