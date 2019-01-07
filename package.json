@@ -1,0 +1,23 @@
+{
+  "name": "citquest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "start-all.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ucll-carey/city-quest.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ucll-carey/city-quest/issues"
+  },
+  "homepage": "https://github.com/ucll-carey/city-quest#readme",
+  "dependencies": {
+    "concurrently": "^4.1.0"
+  }
+}
