@@ -59,3 +59,7 @@ CityQuest consists of 4 custom services:
 - image-service (Spring boot API to retreive an image url for a city)
 - ucll-recommendation-engine (A generic recommendation engine)
 
+## Statistics
+11.05 minutes to build all images from stratch on 2,3GHz Intel Core i5, SSD
+
+1.386GB diskspace for building all 20 images (8 active when running, 954.4MB reclaimable)
