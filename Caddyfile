@@ -1,0 +1,12 @@
+https://cityquest.fun {
+        proxy / localhost:8080 {
+                transparent
+        }
+        log    / /apps/cityquest/logs/access.log "{combined}"
+        log    / /apps/cityquest/logs/access.common.log "{common}"
+        errors /apps/cityquest/logs/error.log
+}
+https://www.cityquest.fun {
+        redir https://cityquest.fun{uri}
+}
+
