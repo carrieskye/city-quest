@@ -2,8 +2,6 @@ version: '3'
 services:
   frontend:
     build: ./frontend/
-    links:
-      - backend
     labels:
       - "traefik.port=80"
       - "traefik.frontend.rule=PathPrefix:/"
