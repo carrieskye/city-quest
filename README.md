@@ -70,6 +70,7 @@ CityQuest consists of 4 custom services:
 - Whenever a new push is made to the root repository it auto-deploys (Continuous Integration) the application to our personal server.
 - All docker containers can be listed using a web interface with portainer.
 - The whole application is accessable on a public registered (bought) domain name (cityquest.fun)
+- Using Caddy server (let's encrypt included) the application automatically get's an SSL certificate.
 
 ## Statistics
 11.05 minutes to build all images from stratch on 2,3GHz Intel Core i5, SSD (mainly due to gradle and npm dependencies)
