@@ -14,8 +14,9 @@ services:
       - mongodb
       - consul
     environment:
-      - MONGODB_URI=mongodb://mongodb/cityquest
       - IMAGESERVICE_URI=http://imageservice:8080/
+    env_file:
+      - mongo-credentials.env
     labels:
       - "traefik.port=8080"
       - "traefik.frontend.rule=PathPrefixStrip:/cityquest/"
