@@ -59,6 +59,18 @@ CityQuest consists of 4 custom services:
 - image-service (Spring boot API to retreive an image url for a city)
 - ucll-recommendation-engine (A generic recommendation engine)
 
+## Extra on top of assignment
+- Building all services does not require anything but docker (custom Dockerfiles without jib, no java required to deploy!)
+- We integrated an extra service that is linked using docker (image-service)
+- Registrator will register all docker containers to consul by `name` and `name-port`.
+- There is a circuit breaker in backend and frontend.
+- The application is runnable using a single command locally without docker and consul. (For faster development)
+- The application is split in small repo's containing the micro-services, not a monolith.
+- There's a root repository that contains all micro-services as submodules for easy checkout.
+- Whenever a new push is made to the root repository it auto-deploys (Continuous Integration) the application to our personal server.
+- All docker containers can be listed using a web interface with portainer.
+- The whole application is accessable on a public registered (bought) domain name (cityquest.fun)
+
 ## Statistics
 11.05 minutes to build all images from stratch on 2,3GHz Intel Core i5, SSD (mainly due to gradle and npm dependencies)
 
